@@ -179,7 +179,7 @@ Selects ACTIVITY's frame/tab and then switches back."
 ;;;; Variables
 
 (with-demoted-errors "activities: Variable `activities-activities' failed to load persisted data: %S"
-    (persist-defvar activities-activities nil "FIXME: Docstring." (expand-file-name "~/Documents/activities/activities-activities")))
+    (persist-defvar activities-activities nil "FIXME: Docstring."))
 
 (defvar activities-buffer-local-variables nil
     "Variables whose value are saved and restored by activities.
