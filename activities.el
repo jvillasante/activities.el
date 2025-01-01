@@ -179,7 +179,7 @@ Selects ACTIVITY's frame/tab and then switches back."
 ;;;; Variables
 
 (with-demoted-errors "activities: Variable `activities-activities' failed to load persisted data: %S"
-    (persist-defvar activities-activities nil "FIXME: Docstring."))
+    (persist-defvar activities-activities nil "FIXME: Docstring." (expand-file-name "~/Documents/activities/activities-activities")))
 
 (defvar activities-buffer-local-variables nil
     "Variables whose value are saved and restored by activities.
@@ -510,13 +510,12 @@ accordingly."
             (progn
                 (setf activities-mode-timer
                       (run-with-idle-timer activities-mode-idle-frequency t #'activities-save-all))
-                ;; (add-hook 'kill-emacs-hook #'activities-mode--killing-emacs)
+                (add-hook 'kill-emacs-hook #'activities-mode--killing-emacs)
                 )
         (when (timerp activities-mode-timer)
             (cancel-timer activities-mode-timer)
             (setf activities-mode-timer nil))
-        ;;(remove-hook 'kill-emacs-hook #'activities-mode--killing-emacs)
-        ))
+        (remove-hook 'kill-emacs-hook #'activities-mode--killing-emacs)))
 
 (defun activities-mode--killing-emacs ()
     "Persist all activities' states.
